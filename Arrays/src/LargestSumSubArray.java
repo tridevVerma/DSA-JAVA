@@ -1,32 +1,29 @@
 public class LargestSumSubArray {
-    public static int findLargestSum(int[] arr, int n, int index, int sum){
+    public static int maxSubArraySum(int[] arr, int n){
         // Kadane's Algorithm
         // Time Complexity : O(n)
         // Space Complexity : O(1)
 
-        if(index == n) return 0;
-
-        int maxSum = 0;
-        int currentSum = 0;
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
         for(int i = 0; i < n; i++){
-            if(arr[i] + currentSum > arr[i]){
-                currentSum += arr[i];
+            if(sum + arr[i] > arr[i]){
+                sum += arr[i];
             }
             else{
-                currentSum = arr[i];
+                sum = arr[i];
             }
 
-            if(currentSum > maxSum){
-                maxSum = currentSum;
-            }
+            max = Math.max(sum, max);
         }
 
-        return maxSum;
+        return max;
     }
 
     public static void main(String[] args) {
-        int[] arr = {-3, 4, -1, -2, 1, 5};
-        int ans = findLargestSum(arr, arr.length, 0, 0);
+//        int[] arr = {-3, 4, -1, -2, 1, 5};
+        int[] arr = {-5, 1, -2, 3, -1, 2, -2};
+        int ans = maxSubArraySum(arr, arr.length);
         System.out.println(ans);
     }
 }
